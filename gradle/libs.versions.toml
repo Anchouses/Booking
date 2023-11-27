@@ -1,0 +1,57 @@
+[versions]
+#Navigation
+cicerone-ver = "7.1"
+
+#Coil
+coil-ver = "2.5.0"
+
+#DI
+converter-scalars = "2.9.0"
+hilt-ver = "2.48.1"
+
+#Compose
+android-compose-ver = "2023.10.01"
+
+#Android
+android-core-ver = "1.12.0"
+android-appcompat-ver = "1.6.1"
+android-material-ver = "1.10.0"
+activity_ver = "1.8.1"
+fragment_ver = "1.6.2"
+
+#Tests
+retrofit = "2.9.0"
+test-junit-ver = "4.13.2"
+test-junit-android-ver = "1.1.5"
+test-espresso-ver = "3.5.1"
+
+[libraries]
+#Navigation
+cicerone = { group = "com.github.terrakok", name = "cicerone", version.ref = "cicerone-ver" }
+
+#Coil
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-ver" }
+
+#DI
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converter-scalars" }
+converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "converter-scalars" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-ver" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-ver" }
+
+#Compose
+android-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "android-compose-ver" }
+android-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+android-compose-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+
+#Android
+android-core = { group = "androidx.core", name = "core-ktx", version.ref = "android-core-ver" }
+android-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "android-appcompat-ver" }
+android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material-ver" }
+android-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity_ver" }
+android-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment_ver" }
+
+#Tests
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+test-junit = { group = "junit", name = "junit", version.ref = "test-junit-ver" }
+test-junit-android = { group = "androidx.test.ext", name = "junit", version.ref = "test-junit-android-ver" }
+test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "test-espresso-ver" }
