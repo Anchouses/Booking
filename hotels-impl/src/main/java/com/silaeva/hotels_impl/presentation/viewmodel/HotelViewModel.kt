@@ -1,8 +1,9 @@
 package com.silaeva.hotels_impl.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.silaeva.hotels_impl.data.HotelRepositoryImpl
+import com.silaeva.hotels_impl.data.repository.HotelRepositoryImpl
 import com.silaeva.hotels_impl.domain.entity.Hotel
 import com.silaeva.hotels_impl.domain.entity.HotelDescription
 import com.silaeva.rooms_api.RoomsCoordinator
@@ -18,21 +19,21 @@ class HotelViewModel @Inject constructor(
     private val roomsCoordinator: RoomsCoordinator
 ): ViewModel() {
 
-    private val _hotel = MutableStateFlow(
+    private var _hotel = MutableStateFlow(
         Hotel(
             id = 1,
-            name = "Лучший пятизвездочный отель в Хургаде, Египет",
-            address = "Madinat Makadi, Safaga Road, Makadi Bay, Египет",
-            minimalPrice = 134268,
-            priceForIt = "За тур с перелётом",
+            name = "отель так себе на самом деле",
+            adress = "Madinat Makadi, Safaga Road, Makadi Bay, Египет",
+            minimal_price = 134268,
+            price_for_it = "За тур с перелётом",
             rating = 5,
-            ratingName = "Превосходно",
-            imageUrls = listOf(
+            rating_name = "Превосходно",
+            image_urls = listOf(
                 "https://www.atorus.ru/sites/default/files/upload/image/News/56149/Club_Priv%C3%A9_by_Belek_Club_House.jpg",
                 "https://deluxe.voyage/useruploads/articles/The_Makadi_Spa_Hotel_02.jpg",
                 "https://deluxe.voyage/useruploads/articles/article_1eb0a64d00.jpg"
             ),
-            aboutTheHotel = HotelDescription(
+            about_the_hotel = HotelDescription(
                 description = "Отель VIP-класса с собственными гольф полями. Высокий уровнь сервиса. Рекомендуем для респектабельного отдыха. Отель принимает гостей от 18 лет!",
                 peculiarities = listOf(
                     "Бесплатный Wifi на всей территории отеля",
@@ -44,17 +45,20 @@ class HotelViewModel @Inject constructor(
         )
     )
 
-    val hotel : StateFlow < Hotel > = _hotel
+    val hotel : StateFlow  <Hotel>  = _hotel
 
     private var requestJob: Job? = null
 
+    private val tag = "Tag"
+
     fun getHotel() {
+        Log.d(tag, "Отправляем запрос")
         requestJob?.cancel()
         requestJob = viewModelScope.launch {
             _hotel.value = HotelRepositoryImpl().getHotel()
+            Log.d(tag, "Запрос отправлен")
         }
     }
-
     fun onChooseRoomButtonClick(hotelName: String) {
         roomsCoordinator.navigateToRooms(hotelName)
     }

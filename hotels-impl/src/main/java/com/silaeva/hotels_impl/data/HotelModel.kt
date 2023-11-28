@@ -1,7 +1,7 @@
-package com.silaeva.hotels_impl.domain.entity
+package com.silaeva.hotels_impl.data
 
-data class Hotel(
-    val about_the_hotel: HotelDescription,
+data class HotelModel(
+    val about_the_hotel: HotelModelDescription,
     val adress: String,
     val id: Int,
     val image_urls: List<String>,
@@ -12,7 +12,8 @@ data class Hotel(
     val rating_name: String
 )
 
-data class HotelDescription(
+data class HotelModelDescription(
     val description: String,
-    val peculiarities: List<String>
+    val peculiarities: List<String>,
 )
+

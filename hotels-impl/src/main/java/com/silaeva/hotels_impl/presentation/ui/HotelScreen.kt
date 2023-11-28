@@ -23,7 +23,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomCenter
@@ -41,17 +40,16 @@ import com.silaeva.common_ui.Toolbar
 import com.silaeva.common_ui.typography.Colors
 import com.silaeva.common_ui.typography.Typography
 import com.silaeva.hotels_impl.R
-import com.silaeva.hotels_impl.domain.entity.Hotel
 import com.silaeva.hotels_impl.presentation.viewmodel.HotelViewModel
-
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun HotelScreen(viewModel: HotelViewModel) {
 
-    val getHotel: State<Hotel> = viewModel.hotel.collectAsState()
+    viewModel.getHotel()
+    val getHotelModel= viewModel.hotel.collectAsState()
+    val hotel = getHotelModel.value
 
-    val hotel = getHotel.value
 
     Box(
         modifier = Modifier
@@ -76,8 +74,8 @@ fun HotelScreen(viewModel: HotelViewModel) {
                         .padding(top = 49.dp)
                 ) {
                     Carousel(
-                        imageList = hotel.imageUrls,
-                        pagerState = rememberPagerState { hotel.imageUrls.size }
+                        imageList = hotel.image_urls,
+                        pagerState = rememberPagerState { hotel.image_urls.size }
                     )
 
                     Button(
@@ -91,18 +89,18 @@ fun HotelScreen(viewModel: HotelViewModel) {
                             .padding(vertical = 5.dp),
                         onClick = {}
                     ) {
-                        val ratingString = "${hotel.rating} ${hotel.ratingName}"
+                        val ratingString = "${hotel.rating} ${hotel.rating_name}"
                         Image(
                             painter = painterResource(id = R.drawable.ic_golden_star),
                             contentDescription = ratingString,
                             modifier = Modifier
-                                .align(Alignment.CenterVertically)
+                                .align(CenterVertically)
                         )
                         Text(
                             text = ratingString,
                             style = Typography.tagsAccent,
                             modifier = Modifier
-                                .align(Alignment.CenterVertically)
+                                .align(CenterVertically)
                         )
                     }
 
@@ -113,7 +111,7 @@ fun HotelScreen(viewModel: HotelViewModel) {
                     )
 
                     Text(
-                        text = hotel.address,
+                        text = hotel.adress,
                         style = Typography.addressBlue
                     )
 
@@ -121,13 +119,13 @@ fun HotelScreen(viewModel: HotelViewModel) {
                         verticalAlignment = Alignment.Bottom,
                     ) {
                         Text(
-                            text = "От ${hotel.minimalPrice} ₽",
+                            text = "От ${hotel.minimal_price} ₽",
                             style = Typography.priceLarge,
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
 
                         Text(
-                            text = hotel.priceForIt,
+                            text = hotel.price_for_it,
                             style = Typography.bodySecondary,
                             modifier = Modifier.padding(
                                 start = 8.dp,
@@ -154,7 +152,7 @@ fun HotelScreen(viewModel: HotelViewModel) {
                     FlowRow(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        for (peculiarity in hotel.aboutTheHotel.peculiarities) {
+                        for (peculiarity in hotel.about_the_hotel.peculiarities) {
                             Text(
                                 text = peculiarity,
                                 style = Typography.tagsSecondary,
@@ -170,7 +168,7 @@ fun HotelScreen(viewModel: HotelViewModel) {
 
 
                     Text(
-                        text = hotel.aboutTheHotel.description,
+                        text = hotel.about_the_hotel.description,
                         style = Typography.description,
                         overflow = TextOverflow.Visible,
                         modifier = Modifier

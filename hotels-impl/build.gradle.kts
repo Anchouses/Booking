@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.android.material)
     implementation(libs.android.fragment)
 
+    implementation ("androidx.room:room-coroutines:2.1.0-alpha04")
+
     implementation(libs.cicerone)
 
     implementation(libs.hilt)
@@ -66,6 +68,9 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.scalars)
     implementation (libs.converter.gson)
+
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.junit.android)
